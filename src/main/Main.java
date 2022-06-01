@@ -82,8 +82,9 @@ public class Main {
 		String in=rd.nextLine();
 		String[] vls=in.split(",");
 		String path="";
+		graph.path(vls[0],vls[1]);
 		if(mtrxGraph) {
-			//Floyd warshall
+			//Se lee el floyd warshall ya hecho
 		}else {
 			//Dijkstra
 		}

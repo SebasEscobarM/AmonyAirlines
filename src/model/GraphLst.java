@@ -56,4 +56,10 @@ public class GraphLst<T> implements Graph<T>{
 	public HashMap<T,Node<T>> getNds(){
 		return nds;
 	}
+
+	@Override
+	public void path(T from, T to) {
+		// TODO Auto-generated method stub
+		
+	}
 }
