@@ -6,11 +6,11 @@ import java.util.List;
 public class Node<T> {
 
 	private T item;
-	private List<Node<T>> nghbr;
+	private List<Edge<T>> edg;
 	
 	public Node(T item){
 		this.item=item;
-		this.nghbr=new ArrayList<>(); 
+		this.edg=new ArrayList<>();
 	}
 	
 	public T getItem() {
@@ -21,7 +21,7 @@ public class Node<T> {
 		this.item = item;
 	}
 	
-	public List<Node<T>> getNghbr() {
-		return nghbr;
+	public List<Edge<T>> getEdg() {
+		return edg;
 	}
 }
