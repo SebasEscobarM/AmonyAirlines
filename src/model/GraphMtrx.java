@@ -77,23 +77,30 @@ public class GraphMtrx<T> implements Graph<T>{
 	@Override
 	public String path(T from, T to) {
 		floydWarshall();
-		ArrayList<T> p=new ArrayList<>();                                                            		
-		p.add(to);
-		boolean cont=true;
-//		Leer y sacar el camino
-		do{
-			p.add(ant.get(from).get(p.get(p.size()-1)));
-			if(ant.get(from).get(p.get(p.size()-1))==from) {
-				p.add(from);
-				cont=false;
-			}
-		}while(cont);
-		String path="El vuelo tomara un tiempo de vuelo promedio de: "+wMtrx.get(from).get(to)+"\nLa ruta que se debe tomar es:\n" ;
-		for(int i=p.size()-1;i>=0;i--) {
-			if(i!=0) {
-				path+=p.get(i)+" --> ";
-			}else {
-				path+=p.get(i);
+		String path="";
+		if(wMtrx.get(from).get(to)==Integer.MAX_VALUE) {
+			path="No existe actualmente una ruta posible entre "+ from+" y "+to+".";
+		}else {
+			ArrayList<T> p=new ArrayList<>();                                                            		
+			p.add(to);
+			boolean cont=true;
+//			Leer y sacar el camino
+			do{
+				p.add(ant.get(from).get(p.get(p.size()-1)));
+				if(ant.get(from).get(p.get(p.size()-1))==from) {
+					if(p.get(p.size()-1)!=from) {
+						p.add(from);
+					}
+					cont=false;
+				}
+			}while(cont);
+			path="El vuelo tomara un tiempo de vuelo promedio de: "+wMtrx.get(from).get(to)+"\nLa ruta que se debe tomar es:\n" ;
+			for(int i=p.size()-1;i>=0;i--) {
+				if(i!=0) {
+					path+=p.get(i)+" --> ";
+				}else {
+					path+=p.get(i);
+				}
 			}
 		}
 		return path;

@@ -61,24 +61,36 @@ public class GraphLst<T> implements Graph<T>{
 	@Override
 	public String path(T from, T to) {
 		dijkstra(from);
+		//Comprobar si hay camino
 		ArrayList<T> p=new ArrayList<>();                                                            		
 		boolean cont=true;
 		p.add(to);
 		do {
-			p.add(nds.get(p.get(p.size()-1)).getPrev().getItem());
-			if(nds.get(p.get(p.size()-1)).getPrev().getItem()==from) {
+			if(nds.get(p.get(p.size()-1)).getPrev()!=null) {
+				p.add(nds.get(p.get(p.size()-1)).getPrev().getItem());
+			}
+			if(nds.get(p.get(p.size()-1)).getPrev()==null) {
+				cont=false;
+			}
+			if(nds.get(p.get(p.size()-1)).getPrev()!=null && nds.get(p.get(p.size()-1)).getPrev().getItem()==from) {
 				p.add(from);
 				cont=false;
 			}
 		}while(cont);
-		String path="El vuelo tomara un tiempo de vuelo promedio de: "+nds.get(to).getDst()+"\nLa ruta que se debe tomar es:\n" ;
-		for(int i=p.size()-1;i>=0;i--) {
-			if(i!=0) {
-				path+=p.get(i)+" --> ";
-			}else {
-				path+=p.get(i);
+		String path="";
+		if(!p.isEmpty() && p.get(p.size()-1)==from) {
+			path="El vuelo tomara un tiempo de vuelo promedio de: "+nds.get(to).getDst()+"\nLa ruta que se debe tomar es:\n" ;
+			for(int i=p.size()-1;i>=0;i--) {
+				if(i!=0) {
+					path+=p.get(i)+" --> ";
+				}else {
+					path+=p.get(i);
+				}
 			}
+		}else {
+			path="No existe actualmente una ruta posible entre "+ from+" y "+to+".";
 		}
+		
 		return path;
 	}
 	
