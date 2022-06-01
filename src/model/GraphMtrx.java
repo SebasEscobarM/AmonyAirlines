@@ -1,5 +1,6 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class GraphMtrx<T> implements Graph<T>{
@@ -74,29 +75,29 @@ public class GraphMtrx<T> implements Graph<T>{
 	}
 
 	@Override
-	public void path(T from, T to) {
+	public String path(T from, T to) {
 		floydWarshall();
-		T inter=ant.get(from).get(to);
-		//Leer y sacar el camino
-//		do(){
-//			
-//		}
-		
-		
-//		for(T k:ant.keySet()) {
-//			for(T j: ant.keySet()) {
-//				System.out.print("["+wMtrx.get(k).get(j)+"]");
-//			}
-//			System.out.println();
-//		}
-//		System.out.println();
-//		System.out.println();
-//		for(T k:ant.keySet()) {
-//			for(T j: ant.keySet()) {
-//				System.out.print("["+ant.get(k).get(j)+"]");
-//			}
-//			System.out.println();
-//		}
+		ArrayList<T> p=new ArrayList<>();                                                            		
+		p.add(to);
+		boolean cont=true;
+//		Leer y sacar el camino
+		do{
+			p.add(ant.get(from).get(p.get(p.size()-1)));
+			if(ant.get(from).get(p.get(p.size()-1))==from) {
+				p.add(from);
+				cont=false;
+			}
+		}while(cont);
+		String path="El vuelo tomara un tiempo de vuelo promedio de: "+wMtrx.get(from).get(to)+"\nLa ruta que se debe tomar es:\n" ;
+		for(int i=p.size()-1;i>=0;i--) {
+			if(i!=0) {
+				path+=p.get(i)+" --> ";
+			}else {
+				path+=p.get(i);
+			}
+		}
+		return path;
+
 	}
 	
 	public void floydWarshall() {

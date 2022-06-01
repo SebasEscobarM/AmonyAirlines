@@ -6,29 +6,35 @@ import org.junit.jupiter.api.Test;
 
 class GraphTest {
 
-//	private static Graph<String> graph;
-//	
-//	public void setupStage1() {
-//		graph= new Graph<>();
-//	}
-//	
-//	@Test
-//	void test1() {
-//		//Se agregan 3 vertices y dos aristas que apuntan a este,
-//		//se elimina el nodo al que apuntan las dos aristas.
-//		//Por tanto el resultado esperado es que se elimine el vertice indicado y
-//		//sus referencias en la lista de vecidos de los otros dos nodos.
-//		setupStage1();
-//		graph.addVertex(new Node<String>("a"));
-//		graph.addVertex(new Node<String>("b"));
-//		graph.addVertex(new Node<String>("c"));
-//		graph.addEdge("a", "b", 3);
-//		graph.addEdge("c", "b", 4);
-//		graph.deleteVertex("b");
-//		
+	private static GraphLst<String> graph;
+	
+	public void setupStage1() {
+		graph= new GraphLst<>();
+	}
+	
+	@Test
+	void test1() {
+		//Se agregan 3 vertices y dos aristas que apuntan a este,
+		//se elimina el nodo al que apuntan las dos aristas.
+		//Por tanto el resultado esperado es que se elimine el vertice indicado y
+		//sus referencias en la lista de vecidos de los otros dos nodos.
+		setupStage1();
+		graph.addVertex("a");
+		graph.addVertex("b");
+		graph.addVertex("c");
+		graph.addVertex("d");
+		graph.addEdge("a", "b", 5);
+		graph.addEdge("b", "d", 2);
+		graph.addEdge("a", "c", 1);
+		graph.addEdge("c", "d", 6);
+		graph.addEdge("c", "b", 4);
+		graph.addEdge("d", "a", 7);
+		
+		System.out.println(graph.path("b", "c"));
+		
 //		assertEquals(graph.getNds().size(), 2);
-////		assertEquals(graph.getNds().get("c").getNghbr().size(), 0);
-//	}
+//		assertEquals(graph.getNds().get("c").getNghbr().size(), 0);
+	}
 //	
 //	@Test
 //	void test2() {

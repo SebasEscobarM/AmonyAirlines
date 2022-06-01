@@ -81,13 +81,7 @@ public class Main {
 		System.out.println("Ingrese la ariste de la forma 'A,B' siendo A la ciudad de origen y B la ciudad de destino:");		
 		String in=rd.nextLine();
 		String[] vls=in.split(",");
-		String path="";
-		graph.path(vls[0],vls[1]);
-		if(mtrxGraph) {
-			//Se lee el floyd warshall ya hecho
-		}else {
-			//Dijkstra
-		}
+		System.out.println(graph.path(vls[0],vls[1]));
 	}
 	
 	public static void showCycle() {

@@ -2,6 +2,7 @@ package model;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.PriorityQueue;
 
 public class GraphLst<T> implements Graph<T>{
 	
@@ -58,8 +59,49 @@ public class GraphLst<T> implements Graph<T>{
 	}
 
 	@Override
-	public void path(T from, T to) {
-		// TODO Auto-generated method stub
+	public String path(T from, T to) {
+		dijkstra(from);
+		ArrayList<T> p=new ArrayList<>();                                                            		
+		boolean cont=true;
+		p.add(to);
+		do {
+			p.add(nds.get(p.get(p.size()-1)).getPrev().getItem());
+			if(nds.get(p.get(p.size()-1)).getPrev().getItem()==from) {
+				p.add(from);
+				cont=false;
+			}
+		}while(cont);
+		String path="El vuelo tomara un tiempo de vuelo promedio de: "+nds.get(to).getDst()+"\nLa ruta que se debe tomar es:\n" ;
+		for(int i=p.size()-1;i>=0;i--) {
+			if(i!=0) {
+				path+=p.get(i)+" --> ";
+			}else {
+				path+=p.get(i);
+			}
+		}
+		return path;
+	}
+	
+	public void dijkstra(T src) {
+		nds.get(src).setDst(0);
+		PriorityQueue<Node<T>> q=new PriorityQueue<>(new NdComparator<T>());
+		for(T nd:nds.keySet()) {
+			if(nd!=src) {
+				nds.get(nd).setDst(Integer.MAX_VALUE);
+			}
+			nds.get(nd).setPrev(null);
+			q.add(nds.get(nd));
+		}
 		
+		while(!q.isEmpty()) {
+			Node<T> u=q.peek();
+			for(Edge<T> e:u.getEdg()) {
+				if((u.getDst()+e.getWeight())<e.getTo().getDst()) {
+					e.getTo().setDst(u.getDst()+e.getWeight());
+					e.getTo().setPrev(u);
+				}
+			}
+			q.remove(u);
+		}
 	}
 }
