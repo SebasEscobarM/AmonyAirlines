@@ -16,32 +16,42 @@ class GraphTest {
 		graph= new GraphMtrx<>();
 	}
 	
-//	@Test
-//	void test1() {
-//		setupStage1();
-//		graph.addVertex("a");
-//		graph.addVertex("b");
-//		graph.addVertex("c");
-//		graph.addVertex("d");
-//		graph.addEdge("a", "b", 5);
-//		graph.addEdge("b", "d", 2);
-//		graph.addEdge("a", "c", 1);
-//		graph.addEdge("c", "d", 6);
-//		graph.addEdge("c", "b", 4);
-//		graph.addEdge("d", "a", 7);
-//		
-//		System.out.println(graph.path("b","c"));
-//		
-//		assertEquals(graph.path("b","c"));
-//	}
+	@Test
+	void test1() {
+		//Se prueba el Dijkstra en el caso del grafo como lista de vecinos
+		setupStage1();
+		graph.addVertex("a");
+		graph.addVertex("b");
+		graph.addVertex("c");
+		graph.addEdge("a", "b", 5);
+		graph.addEdge("b", "c", 1);
+		
+		graph.path("a","c");
+		
+		assertEquals(((GraphLst<String>) graph).getNds().get("c").getDst(),6);
+		assertEquals(((GraphLst<String>) graph).getNds().get("c").getPrev().getItem(),"b");
+		assertEquals(((GraphLst<String>) graph).getNds().get("b").getPrev().getItem(),"a");
+	}
 	
 	@Test
 	void test2() {
+		//Se prueba el floyd warshall en el caso de la matriz de adyacencia
+		setupStage2();
+		graph.addVertex("a");
+		graph.addVertex("b");
+		graph.addVertex("c");
+		graph.addEdge("a", "b", 5);
+		graph.addEdge("b", "c", 1);
+		
+		graph.path("a","c");
+		
+		assertEquals(((GraphMtrx<String>) graph).getWMtrx().get("a").get("c"),6);
+		assertEquals(((GraphMtrx<String>) graph).getAnt().get("a").get("c"),"b");
+		assertEquals(((GraphMtrx<String>) graph).getAnt().get("a").get("b"),"a");
+	}
+	@Test
+	void test3() {
 		//Grafo Lista de vecinos
-		//Se agregan 2 vertices y un a ariste del "a" al "b",
-		//se elimina la arista recien creada.
-		//Por tanto el resultado esperado es que se elimine la arista indicada y
-		//las listas de vecinos de ambos nodos este vacia.
 		setupStage1();
 		graph.addVertex("a");
 		graph.addVertex("b");
@@ -56,12 +66,8 @@ class GraphTest {
 	}
 	
 	@Test
-	void test3() {
+	void test4() {
 		//Grafo Matriz
-		//Se agregan 2 vertices y un a ariste del "a" al "b",
-		//se elimina la arista recien creada.
-		//Por tanto el resultado esperado es que se elimine la arista indicada y
-		//las listas de vecinos de ambos nodos este vacia.
 		setupStage2();
 		graph.addVertex("a");
 		graph.addVertex("b");

@@ -69,6 +69,14 @@ public class GraphMtrx<T> implements Graph<T>{
 	public HashMap<T, HashMap<T, Integer>> getMtrx() {
 		return mtrx;
 	}
+	
+	public HashMap<T, HashMap<T, Integer>> getWMtrx() {
+		return wMtrx;
+	}
+	
+	public HashMap<T, HashMap<T, T>> getAnt() {
+		return ant;
+	}
 
 	public void setMtrx(HashMap<T, HashMap<T, Integer>> mtrx) {
 		this.mtrx = mtrx;
@@ -128,6 +136,38 @@ public class GraphMtrx<T> implements Graph<T>{
 			}
 		}
 	}
+
+	@Override
+	public String checkConectivity() {
+		String ans="Los vuelos actualmente registrados son suficientes para conectar cualquier par de ciudades.";
+		HashMap<T, Boolean> vis=new HashMap<>();
+		for(T k:mtrx.keySet()) {
+			vis.put(k, false);
+		}
+		for(T nd: mtrx.keySet()) {
+			vis.replaceAll((ke,itm)-> itm=false);
+			dfs(nd, vis);
+			for(T k: vis.keySet()) {
+				if(!vis.get(k)) {
+					ans="Los vuelos actualmente registrados no logran conectar cualquier par de ciudades elegido.";
+					return ans;
+				}
+			}
+		}
+		return ans;
+	}
 	
+	public void dfs(T nd, HashMap<T, Boolean> vis) {
+		if(vis.get(nd)) {
+			return;
+		}
+		vis.replace(nd, true);
+		for(T k:mtrx.keySet()) {
+			if(mtrx.get(nd).get(k)!=Integer.MAX_VALUE && mtrx.get(nd).get(k)!=0 ) {
+				dfs(k,vis);
+			}
+		}
+	}	
+			
 	
 }

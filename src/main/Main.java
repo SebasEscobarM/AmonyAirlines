@@ -45,7 +45,7 @@ public class Main {
 			System.out.println("4. Eliminar un taryecto directo.");
 			System.out.println("5. Cambiar represetnacion del grafo.");
 			System.out.println("6. Ver ruta de una ciudad a otra.");
-			System.out.println("7. Ver tour completo desde una ciudad.");
+			System.out.println("7. Revisar conexion entre ciudades.");
 			System.out.println("9. Salir.");
 			int menu=Integer.parseInt(rd.nextLine());
 			switch(menu) {
@@ -85,13 +85,7 @@ public class Main {
 	}
 	
 	public static void showCycle() {
-		System.out.println("Ingrese la ciudad de origen del tour:");		
-		String in=rd.nextLine();
-		if(mtrxGraph) {
-			
-		}else {
-			
-		}
+		System.out.println(graph.checkConectivity());
 	}
 	
 	private static void changeGraphType() {
