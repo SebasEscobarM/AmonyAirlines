@@ -39,11 +39,11 @@ public class Main {
 		boolean continu=true;
 		do {
 			System.out.println("Menu principal. Seleccione la opcion que desea usar:");
-			System.out.println("1. Añadir un vertice.");
-			System.out.println("2. Eliminar un vertice.");
-			System.out.println("3. Añadir una arista.");
-			System.out.println("4. Eliminar una arista.");
-			System.out.println("5. Cambiar tipo de grafo.");
+			System.out.println("1. Añadir una ciudad.");
+			System.out.println("2. Eliminar una ciudad.");
+			System.out.println("3. Añadir un taryecto directo.");
+			System.out.println("4. Eliminar un taryecto directo.");
+			System.out.println("5. Cambiar represetnacion del grafo.");
 			System.out.println("6. Ver ruta de una ciudad a otra.");
 			System.out.println("7. Ver tour completo desde una ciudad.");
 			System.out.println("9. Salir.");
@@ -81,12 +81,7 @@ public class Main {
 		System.out.println("Ingrese la ariste de la forma 'A,B' siendo A la ciudad de origen y B la ciudad de destino:");		
 		String in=rd.nextLine();
 		String[] vls=in.split(",");
-		String path="";
-		if(mtrxGraph) {
-			//Floyd warshall
-		}else {
-			//Dijkstra
-		}
+		System.out.println(graph.path(vls[0],vls[1]));
 	}
 	
 	public static void showCycle() {
@@ -133,31 +128,31 @@ public class Main {
 	}
 	
 	private static void deleteEdge() {
-		System.out.println("Ingrese la ariste de la forma 'A,B' siendo A donde inicia y B a donde apunta la arista a eliminar:");		
+		System.out.println("Ingrese el trayecto directo de la forma 'A,B' siendo A de donde parte y B a donde llega el vuelo a eliminar:");		
 		String in=rd.nextLine();
 		String[] vls=in.split(",");
-		System.out.println("Ingrese el peso de la arista a eliminar:");
+		System.out.println("Ingrese el tiempo de duracion promedio del vuelo a eliminar:");
 		int w=Integer.parseInt(rd.nextLine());
 		graph.deleteEdge(vls[0], vls[1], w);	
 	}
 
 	private static void addEdge() {
-		System.out.println("Ingrese la ariste de la forma 'A,B' siendo A donde inicia y B a donde apunta la arista a agregar:");		
+		System.out.println("Ingrese el trayecto directo de la forma 'A,B' siendo A de donde parte y B a donde llega el vuelo a agregar:");		
 		String in=rd.nextLine();
 		String[] vls=in.split(",");
-		System.out.println("Ingrese el peso de la arista a agregar:");
+		System.out.println("Ingrese el tiempo de duracion promedio del vuelo a agregar:");
 		int w=Integer.parseInt(rd.nextLine());
 		graph.addEdge(vls[0], vls[1], w);
 	}
 
 	private static void deleteVertex() {
-		System.out.println("Ingrese el valor del vertice a agregar:");
+		System.out.println("Ingrese el nombre de la ciudad a eliminar:");
 		String item=rd.nextLine();
 		graph.deleteVertex(item);		
 	}
 
 	public static void addVertex() {
-		System.out.println("Ingrese el valor del vertice a agregar:");
+		System.out.println("Ingrese el nombre de la ciudad a agregar:");
 		String item=rd.nextLine();
 		graph.addVertex(item);
 	}

@@ -6,4 +6,5 @@ public interface Graph<T> {
 	public void deleteVertex(T nd);
 	public void addEdge(T from, T to, int w);
 	public void deleteEdge(T from, T to, int w);
+	public String path(T from, T to);
 }
